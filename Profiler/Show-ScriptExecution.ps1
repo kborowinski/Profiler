@@ -82,7 +82,7 @@ function Show-ScriptExecution {
         if (0 -lt $x) {
             # this is fun, but hardly accurate, as the resolution is <15ms
             # and many lines take <0.001ms
-            [System.Threading.Thread]::Sleep($e.SelfDuration * $x)
+            [System.Threading.Thread]::Sleep($e.SelfDuration.TotalMilliseconds * $x)
         }
     }
 }
