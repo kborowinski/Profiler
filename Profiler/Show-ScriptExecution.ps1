@@ -29,6 +29,9 @@ function Show-ScriptExecution {
         0
     }
 
+    # ANSI escape char
+    $a = [char]27
+
     $blueToGreen = $false
     
     if ($blueToGreen) {
@@ -69,14 +72,14 @@ function Show-ScriptExecution {
             }
 
             $col = if ($c -gt 0) { 
-                "`e[38;5;$($c)m"
+                "${a}[38;5;${c}m"
             }
             else {
                 $null
             }
         }
 
-        $o = "$col$text`e[38;5;250m ($([math]::Round($e.SelfDuration.TotalMilliseconds,1))ms, $([int]$p)%)`e[0m"
+        $o = "$col$text${a}[38;5;250m ($([math]::Round($e.SelfDuration.TotalMilliseconds,1))ms, $([int]$p)%)${a}[0m"
         $margin = ' ' * ($e.Level)
         Write-Host "$margin$o"
         if (0 -lt $x) {
